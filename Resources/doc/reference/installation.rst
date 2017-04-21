@@ -93,7 +93,7 @@ When using ACL, the ``UserBundle`` can prevent `normal` user to change settings 
 Doctrine Configuration
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Add these config lines
+Add these config lines. Note that mailer_user parameter cannot be empty or null.
 
 .. code-block:: yaml
 
@@ -103,6 +103,9 @@ Add these config lines
         db_driver:      orm # can be orm or odm
         firewall_name:  main
         user_class:     Sonata\UserBundle\Entity\BaseUser
+        from_email:
+            address: "%mailer_user%"
+            sender_name: "%mailer_user%"
 
 
         group:
@@ -219,7 +222,7 @@ Then, add a new custom firewall handlers for the admin:
 
         providers:
             fos_userbundle:
-                id: fos_user.user_manager
+                id: fos_user.user_provider.username
 
         firewalls:
             # Disabling the security for the web debug toolbar, the profiler and Assetic.
@@ -298,7 +301,7 @@ At this point, the bundle is functional, but not quite ready yet. You need to ge
 
 .. code-block:: bash
 
-    php app/console sonata:easy-extends:generate SonataUserBundle -d src
+    php bin/console sonata:easy-extends:generate SonataUserBundle -d src
 
 If you specify no parameter, the files are generated in ``app/Application/SonataUserBundle`` but you can specify the path with ``--dest=src``
 

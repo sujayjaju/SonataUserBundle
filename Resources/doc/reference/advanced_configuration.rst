@@ -13,6 +13,9 @@ Full configuration options:
         db_driver:        orm # can be orm or mongodb (support is also available within FOSUser for couchdb, propel but none is given for SonataUserBundle)
         firewall_name:    main
         user_class:       Application\Sonata\UserBundle\Entity\User
+        from_email:
+            address: "%mailer_user%"
+            sender_name: "%mailer_user%"
 
         group:
             group_class:  Application\Sonata\UserBundle\Entity\Group
